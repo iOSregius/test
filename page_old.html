@@ -1,0 +1,37 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>custom page</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+  
+</head>
+
+<body>
+<script type="text/javascript">
+    Parse.initialize("zMn02yNOwgNBU2gjZSazDAucWeeIIB7eaxnj3VEs", "vjC3XtjlKKNLfNhrLTHiYOQW7s1nc9wbXEaemdp5");
+	
+var user = new Parse.User();
+user.set("username", "my name");
+user.set("password", "my pass");
+user.set("email", "email@example.com");
+ 
+// other fields can be set just like with Parse.Object
+user.set("phone", "415-392-0202");
+ 
+user.signUp(null, {
+  success: function(user) {
+    // Hooray! Let them use the app now.
+  },
+  error: function(user, error) {
+    // Show the error message somewhere and let the user try again.
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+</script>
+</body>

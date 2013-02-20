@@ -1,0 +1,58 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>My Parse App</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script> -->
+ <script src="jquery.js"></script>
+  <script src="underscore.js"></script>
+  <script src="backbone.js"></script>
+  <script>
+    var app;
+    var router = Backbone.Router.extend({
+      routes: {
+        "": "home"
+      },
+      initialize: function(){
+        
+      },
+      home: function(){
+        this.homeView = new homeView;
+        this.homeView.render();
+      }
+    });
+
+    var homeView = Backbone.View.extend({
+      el: 'body',
+		  template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+             +'<a href="#apples/<%=name%>" >'
+            +'<%=name%>'
+            +'</a>&nbsp;<a class="details" style="text-decoration:none" href="#">USERNAME</a></div>'),
+	  
+      render: function(){
+        this.$el.html(this.template({}));
+      }
+    });
+
+	
+    $(document).ready(function(){
+      app = new router;
+      Backbone.history.start();      
+    })
+	
+	$('.details').click(function() {
+$('#book').show('slow', function() {
+// Animation complete.
+});
+});
+	</script>
+</head>
+
+<body>
+
+</body>
+</html>
