@@ -2,10 +2,16 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+-->
+<script src="jquery.js"></script>
+<script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
+<script src="underscore.js"></script>
+<script src="backbone.js"></script>
+<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
 <title>Backbone Facebook login @ Zsitro's Javascript Lab</title>
 </head>
 <body>
@@ -83,8 +89,9 @@ SessionModel = Backbone.Model.extend({
 				if (!response || response.error) {					
 					callback(true, response.error);
 				} else {
-				window.location = "main.html"
-					alert('first name is ' + response['first_name']);
+				//window.location = "main.html"
+					//alert('first name is ' + response['first_name']);
+					abc(response);
 					console.log('"/me" query success where username is ' + response['name'] + '.',response);					
 					callback(null, response);
 				}
@@ -143,6 +150,19 @@ SessionModel = Backbone.Model.extend({
 window.activeSession = new SessionModel();
 console.log('authorized after create (should be false):',window.activeSession.isAuthorized());
 
+
+function abc(name)
+{
+	Parse.initialize("zMn02yNOwgNBU2gjZSazDAucWeeIIB7eaxnj3VEs", "vjC3XtjlKKNLfNhrLTHiYOQW7s1nc9wbXEaemdp5");
+	var Post = Parse.Object.extend("Post");
+	var post = new Post();
+	//alert(name['first_name']);
+	post.save({firstname: name['first_name'],email:name['email']}, {
+	  success: function(object) {
+		window.location = "main.html"
+	  }
+	});
+}
 </script>
 
 </body>

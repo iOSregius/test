@@ -9,8 +9,10 @@
   <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script> -->
  <script src="jquery.js"></script>
-  <script src="underscore.js"></script>
-  <script src="backbone.js"></script>
+<script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
+<script src="underscore.js"></script>
+<script src="backbone.js"></script>
+<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
   <script>
     var app;
     var router = Backbone.Router.extend({
@@ -25,6 +27,26 @@
         this.homeView.render();
       }
     });
+	Parse.initialize("zMn02yNOwgNBU2gjZSazDAucWeeIIB7eaxnj3VEs", "vjC3XtjlKKNLfNhrLTHiYOQW7s1nc9wbXEaemdp5");
+var Post = Parse.Object.extend("Post");
+var query = new Parse.Query(Post);
+query.equalTo("firstname", "PAtel");
+query.find({
+  success: function(results) {
+    
+	 for (var i = 0; i < results.length; i++) {
+      // This does not require a network access.
+      var post = results[i].get("firstname");
+	  alert("Successfully retrieved " + post + " scores.");
+	 
+    }
+	
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
 
     var homeView = Backbone.View.extend({
       el: 'body',
@@ -49,7 +71,10 @@ $('#book').show('slow', function() {
 // Animation complete.
 });
 });
+ note.get("title");
+
 	</script>
+	
 </head>
 
 <body>
