@@ -8,76 +8,183 @@
   <link rel="stylesheet" href="css/styles.css">
   <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script> -->
- <script src="jquery.js"></script>
-<script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
-<script src="underscore.js"></script>
-<script src="backbone.js"></script>
-<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+	<script src="jquery.js"></script>
+	<script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
+	<script src="underscore.js"></script>
+	<script src="backbone.js"></script>
+	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
   <script>
-    var app;
-    var router = Backbone.Router.extend({
-      routes: {
-        "": "home"
-      },
-      initialize: function(){
-        
-      },
-      home: function(){
-        this.homeView = new homeView;
-        this.homeView.render();
-      }
-    });
-	Parse.initialize("zMn02yNOwgNBU2gjZSazDAucWeeIIB7eaxnj3VEs", "vjC3XtjlKKNLfNhrLTHiYOQW7s1nc9wbXEaemdp5");
-var Post = Parse.Object.extend("Post");
-var query = new Parse.Query(Post);
-query.equalTo("firstname", "PAtel");
-query.find({
-  success: function(results) {
-    
-	 for (var i = 0; i < results.length; i++) {
-      // This does not require a network access.
-      var post = results[i].get("firstname");
-	  alert("Successfully retrieved " + post + " scores.");
-	 
-    }
+  $(document).ready(function() {
+  if(document.cookie.length == 0){
+  	window.location = "index.html"
+		//alert("No cookies");
+	} 
+	});
+  
+  
+  
+	var app;
+	var post;
+	var router = Backbone.Router.extend({
+	routes: {
+	"": "home"
+	},
+	initialize: function(){
 	
-  },
-  error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
-  }
+	},
+	home: function(){
+	this.homeView = new homeView;
+	this.homeView.render();
+	}
+	});
+
+Parse.initialize("zMn02yNOwgNBU2gjZSazDAucWeeIIB7eaxnj3VEs", "vjC3XtjlKKNLfNhrLTHiYOQW7s1nc9wbXEaemdp5");
+
+//var Post = Parse.Object.extend("Post");
+//var query = new Parse.Query(Post);
+//query.equalTo("firstname", "PAtel");
+//query.find({
+//success: function(results) {
+//for (var i = 0; i < results.length; i++) {
+//// This does not require a network access.
+//var post = results[i].get("firstname");
+//alert("Successfully retrieved " + post + " scores.");
+//}
+//},
+//error: function(error) {
+//alert("Error: " + error.code + " " + error.message);
+//}
+//});
+var homeView = Backbone.View.extend({
+el: 'body',
+template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+ +'<a href="#apples/<%=name%>" >'
++'<%=name%>'
++'</a>&nbsp;<a class="details" style="text-decoration:none" href="#">Welcome, <label id="namee"></label></a>|<a href="#" style="text-decoration:none" onclick="logout()" >Logout</a></div><div style="margin-top:100px;"><h3>Welcome, <label id="middlee"></label></h3></div>'),
+
+render: function(){
+this.$el.html(this.template({}));
+}
 });
 
+$(document).ready(function(){
+app = new router;
+Backbone.history.start();      
+})
 
-    var homeView = Backbone.View.extend({
-      el: 'body',
-		  template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-             +'<a href="#apples/<%=name%>" >'
-            +'<%=name%>'
-            +'</a>&nbsp;<a class="details" style="text-decoration:none" href="#">USERNAME</a></div>'),
-	  
-      render: function(){
-        this.$el.html(this.template({}));
-      }
-    });
-
-	
-    $(document).ready(function(){
-      app = new router;
-      Backbone.history.start();      
-    })
-	
-	$('.details').click(function() {
+$('.details').click(function() {
 $('#book').show('slow', function() {
 // Animation complete.
 });
 });
- note.get("title");
+login = function(userName, password){
+window.activeSession.set(
+{
+userName: userName,
+password: password
+},{
+silent:true
+}
+);
+window.activeSession.save();
+}
+<!------------------------------ to get cookie ------------------->
 
+/*function checkCookies(){
+	if(document.cookie.length == 0){
+		alert("No cookies");
+	} else {
+		var carr = document.cookie.split("; ");
+		alert(carr);
+		var c1arr = carr['f_name'].split("=");
+		var c2arr = carr[1].split("=");
+		var c3arr = carr[2].split("=");
+		var firstname = c1arr[1];
+		// var name = c2arr[1];
+		//  var email = c3arr[1];
+		//var str = firstname+" "+name+"| ID: "+email;
+		var str = firstname;
+		document.getElementById('namee').innerHTML = str;
+		document.getElementById('middlee').innerHTML = str;
+	}
+}
+checkCookies()*/
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	//return null;
+	document.getElementById('namee').innerHTML = readCookie('f_name');
+	document.getElementById('middlee').innerHTML = readCookie('f_name');
+}
+
+//alert(readCookie('f_name'));
+//alert(readCookie('u_name'));
+//alert(readCookie('email11'));
+<!------------------------------ to get cookie ------------------->
+
+<!-------------------------------facebook logout ------------------->
+function logout(){
+function createCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+}
+
+    createCookie("f_name","",-1);
+ createCookie("u_name","",-1);
+ createCookie("email11","",-1);
+ FB.logout(function(response) {
+  // user is now logged out
+  window.location = "index.html"
+});
+
+//window.location = "index.html"
+}
+
+ // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId  : '252507681519662',
+	  channelUrl : '//zsitro.com/applications/development/backbonelogin/channel.php',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true  // parse XFBML
+    });
+
+    FB.getLoginStatus(function(response){
+        console.log('FB resp:', response,response.status);
+		$('#btnLogin').on('click',function(){
+			window.activeSession.login(
+			{
+				before:function(){console.log('before login()')},
+				after:function(){console.log('after login()')}
+			});
+		});
+    });
+
+}; 
+
+<!-------------------------------facebook logout -------------------> 
 	</script>
-	
 </head>
-
-<body>
-
+<body onload="readCookie();">
 </body>
 </html>

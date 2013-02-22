@@ -13,9 +13,7 @@
 <script src="backbone.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
 <title>Backbone Facebook login @ Zsitro's Javascript Lab</title>
-</head>
-<body>
-<button id="btnLogin">login</button>
+
 <script>
 
   // Load the SDK Asynchronously
@@ -91,8 +89,48 @@ SessionModel = Backbone.Model.extend({
 				} else {
 				//window.location = "main.html"
 					//alert('first name is ' + response['first_name']);
+					//alert('gfname is ' + global_fname);
+					//global_fname=response['first_name'];
+					//alert('first name is ' + response['first_name']);
+					//alert('gfname is ' + global_fname);
+					//alert('Location is ' + response['location']['name']);
+					/*var date = new Date();
+					var days=1;
+					date.setTime(date.getTime()+(days*24*60*60*1000));
+					var expires = "; expires="+date.toGMTString();
+					var fname1="f_name";
+					var uname1="u_name";
+					var email1="email";
+					var fname=response['first_name'];
+					var uname=response['name'];
+					var email=response['email'];
+					var exdate=new Date();
+					var exdays=1;
+					exdate.setDate(exdate.getDate() + exdays);
+					var c_value_fname=escape(fname) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+					var c_value_uname=escape(uname) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+					var c_value_email=escape(email) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+					//document.cookie=c_name + "=" + c_value;
+					//alert(c_value);
+					document.cookie = fname1 + "=" + c_value_fname;
+					document.cookie = uname1 + "=" + c_value_uname;
+					document.cookie = email1 + "=" + c_value_email;	*/
+					function createCookie(name,value,days) {
+						if (days) {
+							var date = new Date();
+							date.setTime(date.getTime()+(days*24*60*60*1000));
+							var expires = "; expires="+date.toGMTString();
+						}
+						else var expires = "";
+						document.cookie = name+"="+value+expires+"; path=/";
+					}
+					createCookie('f_name',response['first_name'],1);
+					createCookie('u_name',response['name'],1);
+					createCookie('email11',response['email'],1);
+					
 					abc(response);
-					console.log('"/me" query success where username is ' + response['name'] + '.',response);					
+					console.log('"/me" query success where username is ' + response['name'] + '.',response);	
+									
 					callback(null, response);
 				}
 			});
@@ -115,6 +153,7 @@ SessionModel = Backbone.Model.extend({
 					}
 				);									
 				callback(null,"Everything is wonderful.");
+				
 			}
 			else{
 				callback(true,"third_party_id check failed!");
@@ -143,27 +182,72 @@ SessionModel = Backbone.Model.extend({
 	}
 
 });
-
-
-
-
 window.activeSession = new SessionModel();
 console.log('authorized after create (should be false):',window.activeSession.isAuthorized());
-
-
+<!------------- insertion of fb details in parse.com --------------->
 function abc(name)
 {
+	var post_email = '';
 	Parse.initialize("zMn02yNOwgNBU2gjZSazDAucWeeIIB7eaxnj3VEs", "vjC3XtjlKKNLfNhrLTHiYOQW7s1nc9wbXEaemdp5");
 	var Post = Parse.Object.extend("Post");
-	var post = new Post();
+	var query = new Parse.Query(Post);
+	query.equalTo("email", name['email']);
+	query.find({
+	success: function(results) {
+		for (var i = 0; i < results.length; i++) {
+			// This does not require a network access.
+			var post_email = results[i].get("email");
+		//	alert("Successfully retrieved " + post_email + " scores.");
+			
+		}
+		
+		if(post_email == name['email'])
+		{
+			window.location = "main.html"
+			//alert(post_email+"email already exist !");
+		}else{
+			var post = new Post();
+			post.save({firstname: name['first_name'],email:name['email'],name:name['name']}, {
+			success: function(object) {
+			 // $.cookie('user_id', name['first_name'])
+			 //alert("Welcome "+ name['first_name']);	
+			window.location = "main.html"
+			}
+			});
+			
+					
+		}
+	}
+});
+	//var post = new Post();
 	//alert(name['first_name']);
-	post.save({firstname: name['first_name'],email:name['email']}, {
+	/*if(post.email == name['email'])
+	{
+		alert("already exist");
+	}
+	else
+	{
+	post.save({firstname: name['first_name'],email:name['email'],name:name['name']}, {
 	  success: function(object) {
+	  	 // $.cookie('user_id', name['first_name'])
 		window.location = "main.html"
-	  }
-	});
+	  
+	});}
+	}*/
 }
+<!------------- insertion of fb details in parse.com --------------->
 </script>
+
+
+
+
+
+
+</head>
+<body>
+<button id="btnLogin">login</button>
+
+
 
 </body>
 </html>
