@@ -1,0 +1,65 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Add Details</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../jquery.js"></script>
+	<script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
+	<script src="../underscore.js"></script>
+	<script src="../backbone.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+  
+</head>
+
+<body>
+
+<div style="display:none" class="success">
+      <p>Welcome ..successfully loggin</p>
+</div>
+
+
+
+<script type="text/javascript">
+
+
+
+<!-------------------- Login View ------------------------>
+
+var app;
+    var router = Backbone.Router.extend({
+      routes: {
+        "": "home"
+      },
+      initialize: function(){
+        
+      },
+      home: function(){
+        this.homeView = new homeView;
+        this.homeView.render();
+      }
+    });
+
+    var homeView = Backbone.View.extend({
+      el: 'body',
+		  template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+             +'<a href="#apples/<%=name%>" >'
+            +'<%=name%>'
+            +'</a>&nbsp;</div><br /><a href="addmovie.html">Film</a> | <a href="addtv.html">TV</a> | <a href="books.html">Books</a> | <a href="music.html">Music</a> | <a href="sport.html">Sport & Leisure</a> | <a href="travel.html">Travel & Adventure</a>'),
+	  
+      render: function(){
+        this.$el.html(this.template({}));
+      }
+    });
+
+
+    $(document).ready(function(){
+      app = new router;
+      Backbone.history.start();      
+    })
+<!-------------------- Login View ------------------------>
+</script>
+</body>
