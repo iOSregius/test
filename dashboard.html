@@ -1,0 +1,199 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard -do share compare</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script> -->
+ <script src="js/jquery.js"></script>
+ <script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
+  <script src="js/underscore.js"></script>
+  <script src="js/backbone.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+  
+  <script>
+  $(document).ready(function() {
+ 
+  if(document.cookie.length == 0){
+  	window.location = "index.html"
+		//alert("No cookies");
+	} 
+	});
+  
+    var app;
+    var router = Backbone.Router.extend({
+      routes: {
+        "": "home"
+      },
+      initialize: function(){
+        
+      },
+      home: function(){
+        this.homeView = new homeView;
+        this.homeView.render();
+      }
+    });
+
+
+	<!------------------parse---------------------->
+	function fetching(aaa)
+	{
+		Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
+		var AddMovie = Parse.Object.extend("AddMovie");
+		var query = new Parse.Query(AddMovie);
+		query.get("blBQ5zg1Jm", {
+		success: function(addMovie) {
+		// The object was retrieved successfully.
+		var movie_title = addMovie.get("movie_title");
+		var movie_desc = addMovie.get("movie_desc");
+		document.getElementById('movie_title').innerHTML = movie_title;
+		document.getElementById('movie_desc').innerHTML = movie_desc;
+		},
+		error: function(object, error) {
+		alert("failed");
+		// The object was not retrieved successfully.
+		// error is a Parse.Error with an error code and description.
+		}
+		});
+		var AddTravel = Parse.Object.extend("AddTravel");
+		var query = new Parse.Query(AddTravel);
+		query.get("94gcMuLsh9", {
+		success: function(addTravel) {
+		// The object was retrieved successfully.
+		var travel_title = addTravel.get("travel_title");
+		var travel_desc = addTravel.get("travel_desc");
+		document.getElementById('travel_title').innerHTML = travel_title;
+		document.getElementById('travel_desc').innerHTML = travel_desc;
+		},
+		error: function(object, error) {
+		alert("failed");
+		// The object was not retrieved successfully.
+		// error is a Parse.Error with an error code and description.
+		}
+		});
+		var AddTv = Parse.Object.extend("AddTv");
+		var query = new Parse.Query(AddTv);
+		query.get("kuqXjFF5So", {
+		success: function(addTv) {
+		// The object was retrieved successfully.
+		var show_title = addTv.get("show_title");
+		var show_desc = addTv.get("show_desc");
+		document.getElementById('show_title').innerHTML = show_title;
+		document.getElementById('show_desc').innerHTML = show_desc;
+		},
+		error: function(object, error) {
+		alert("failed");
+		// The object was not retrieved successfully.
+		// error is a Parse.Error with an error code and description.
+		}
+		});
+		}
+	<!------------------parse---------------------->
+
+
+    var homeView = Backbone.View.extend({
+      el: 'body',
+		  template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+ +'<a href="#apples/<%=name%>" >'
++'<%=name%>'
++'</a>&nbsp;<a class="details" style="text-decoration:none" href="#">Welcome, <label id="namee"></label></a>|<a href="#" style="text-decoration:none" onclick="logout()" >Logout</a></div>&nbsp;'+fetching()+'</div><br /><div id="left">'
+			+'<div id="travel"><h4><div id="travel_title"></div></h4><p id="travel_desc" class="ellipsis"></p>&nbsp;<div id="more">more</div><br /><button>To The List!</button></div>'
+			+'<div id="film"><h4><div id="movie_title"></div></h4><p id="movie_desc"></p>&nbsp;<a href="">more</a><br /><button>To The List!</button></div>'
+			+'<div id="tv"><h4><div id="show_title"></div></h4><p id="show_desc"></p>&nbsp;<a href="">more</a><br /><button>To The List!</button></div></div>'
+			+'<div id="right">Friends<br /><div id="friend"><img src="img/Koala.jpg" id="pic" /><p id="name"><a href="">aaaaa</a></p></div>'
+			+'</div>'
+			),
+	  
+      render: function(){
+        this.$el.html(this.template({}));
+      }
+    });
+
+
+    $(document).ready(function(){
+      app = new router;
+      Backbone.history.start();      
+    })
+	
+	
+	function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	//return null;
+	document.getElementById('namee').innerHTML = readCookie('f_name');
+	//document.getElementById('middlee').innerHTML = readCookie('f_name');
+}
+
+
+function logout(){
+function createCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+}
+
+    createCookie("f_name","",-1);
+ createCookie("u_name","",-1);
+ createCookie("email11","",-1);
+ FB.logout(function(response) {
+  // user is now logged out
+  window.location = "index.html"
+});
+
+//window.location = "index.html"
+}
+
+ // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId  : '252507681519662',
+	  channelUrl : '//zsitro.com/applications/development/backbonelogin/channel.php',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true  // parse XFBML
+    });
+
+    FB.getLoginStatus(function(response){
+        console.log('FB resp:', response,response.status);
+		$('#btnLogin').on('click',function(){
+			window.activeSession.login(
+			{
+				before:function(){console.log('before login()')},
+				after:function(){console.log('after login()')}
+			});
+		});
+    });
+
+}; 
+
+	
+	
+	</script>
+</head>
+
+<body>
+<body onLoad="readCookie();">
+
+</body>
+</html>

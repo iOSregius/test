@@ -7,10 +7,10 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 -->
-<script src="jquery.js"></script>
+<script src="js/jquery.js"></script>
 <script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
-<script src="underscore.js"></script>
-<script src="backbone.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
 <title>Backbone Facebook login @ Zsitro's Javascript Lab</title>
 
@@ -204,7 +204,7 @@ function abc(name)
 		
 		if(register_email == name['email'])
 		{
-			window.location = "main.html"
+			window.location = "dashboard.html"
 			//alert(post_email+"email already exist !");
 		}else{
 			var register = new Register();
@@ -212,7 +212,7 @@ function abc(name)
 			success: function(object) {
 			 // $.cookie('user_id', name['first_name'])
 			 //alert("Welcome "+ name['first_name']);	
-			window.location = "main.html"
+			window.location = "dashboard.html"
 			}
 			});
 			

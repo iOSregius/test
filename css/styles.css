@@ -38,3 +38,47 @@ body {
     color: green;
     line-height: 13px;
 }
+#left{
+	float: left;
+    height: auto;
+    margin-left: 70px;
+    width: 650px;
+}
+
+#travel{
+	border-color: black;
+    border-style: solid;
+}
+
+#film{
+	border-color: black;
+    border-style: solid;
+}
+#tv{
+	border-color: black;
+    border-style: solid;
+}
+
+#right{
+	float: left;
+    height: auto;
+    margin-left: 70px;
+    width: 150;
+	
+}
+#friend{
+margin-left: 70px;
+width: 150;
+float: left;
+	border-color: black;
+    border-style: solid;
+}
+#friend img{
+float:left;
+padding:10px;
+ width : 50px;
+}
+#friend p{
+float:left;
+ width : 100px;
+}
