@@ -24,25 +24,40 @@
 
 
 <script type="text/javascript">
-
+var app;
+    var router = Backbone.Router.extend({
+      routes: {
+        "": "home"
+      },
+      initialize: function(){
+        
+      },
+      home: function(){
+        this.homeView = new homeView;
+        this.homeView.render();
+      }
+    });
 <!------------- LOGIN CODE ------------------------------->
 	  Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-	  		var uname = document.getElementById('username');
-			var pass = document.getElementById('password');
-			
-			Parse.User.logIn("admin", "admin", {
+	  
+	  function AuthenticateUser()
+	  {
+	  		var uname = document.getElementById('username').value;
+			var pass = document.getElementById('password').value;
+
+			// CALLING PARSE LOGIN API FOR AUTHENTICATION
+			Parse.User.logIn(uname, pass, {
 		  success: function(user) {
 		  
 		   $(".success").show();
-			// Do stuff after successful login.
 			window.location = "select.html";
 		  },
 		  error: function(user, error) {
-		   alert("Sorry");
+		   alert(error);
 			// The login failed. Check error to see why.
 		  }
 		});
-		
+		}
 			//var uname = document.getElementById('username');
 			//var pass = document.getElementById('password');
 			//alert(uname.value);
@@ -74,26 +89,14 @@
 
 <!-------------------- Login View ------------------------>
 
-var app;
-    var router = Backbone.Router.extend({
-      routes: {
-        "": "home"
-      },
-      initialize: function(){
-        
-      },
-      home: function(){
-        this.homeView = new homeView;
-        this.homeView.render();
-      }
-    });
+
 
     var homeView = Backbone.View.extend({
       el: 'body',
 		  template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
              +'<a href="#apples/<%=name%>" >'
             +'<%=name%>'
-            +'</a>&nbsp;<a class="details" style="text-decoration:none" href="login2.html">Login/register</a></div><br /><form name="login" method="post" id="form" ><div>USERNAME :: <input type="text" name="username" id="username" /></div><br /><div>PASSWORD :: <input type="password" id="password" name="password" /> </div><br /><input type="submit" name="submit" id="submit" value="Login" /></form>'),
+            +'</a>&nbsp;<a class="details" style="text-decoration:none" href="login2.html">Login/register</a></div><br /><div>USERNAME :: <input type="text" name="username" id="username" /></div><br /><div>PASSWORD :: <input type="password" id="password" name="password" /> </div><br /><input type="submit" name="submit" id="submit" value="Login" onclick="return AuthenticateUser()"/>'),
 	  
       render: function(){
         this.$el.html(this.template({}));

@@ -15,8 +15,8 @@
 		addToHelloCollection : function(e) {
 			var hello = new Hello({
 				//name : this.$('input').val()
-				conquest : this.$('#movie_conquest').val(),
-				desc : this.$('#movie_desc').val()
+				title : this.$('#movie_title').val(),
+				year : this.$('#movie_year').val()
 				
 			});
 			this.helloListView.collection.add(hello);
@@ -26,8 +26,8 @@
 	var Hello = Backbone.Model.extend({
 		initialize : function() {
 			//this.name = 'name'
-			this.conquest = 'conquest',
-			this.desc = 'desc'
+			this.title = 'title',
+			this.year = 'year'
 		}
 	});
 
@@ -35,20 +35,25 @@
 		tagName : 'li',
 		render : function() {
 			//$(this.el).html('Hello ' + this.model.get('name'));
-			$(this.el).html('Hello ' + this.model.get('conquest'));
-			$(this.el).html('Hello ' + this.model.get('desc'));
+			$(this.el).html('Hello ' + this.model.get('title'));
+			$(this.el).html('Hello ' + this.model.get('year'));
+			
 			
 			 Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-			 var MovieConquest = Parse.Object.extend("MovieConquest");
-			var movieConquest = new MovieConquest();
+			 var AllMovie = Parse.Object.extend("AllMovie");
 			
-			movieConquest.save({movie_conquest: this.model.get('conquest'),movie_desc: this.model.get('desc')}, {
-			  success: function(movieConquest) {
+			 
+			 
+			 var AllMovie = Parse.Object.extend("AllMovie");
+			var allMovie = new AllMovie();
+			
+			allMovie.save({movie_title: this.model.get('title'),movie_year: this.model.get('year')}, {
+			  success: function(allMovie) {
 			  
 				// The object was saved successfully.
-				alert("Movie Conquest added Successfully");
+				alert("Movie added Successfully");
 			  },
-			  error: function(movieConquest, error) {
+			  error: function(allMovie, error) {
 				// The save failed.
 				// error is a Parse.Error with an error code and description.
 			  }

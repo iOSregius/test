@@ -15,8 +15,8 @@
 		addToHelloCollection : function(e) {
 			var hello = new Hello({
 				//name : this.$('input').val()
-				conquest : this.$('#movie_conquest').val(),
-				desc : this.$('#movie_desc').val()
+				title : this.$('#music_title').val(),
+				artist : this.$('#music_artist').val()
 				
 			});
 			this.helloListView.collection.add(hello);
@@ -26,8 +26,8 @@
 	var Hello = Backbone.Model.extend({
 		initialize : function() {
 			//this.name = 'name'
-			this.conquest = 'conquest',
-			this.desc = 'desc'
+			this.title = 'title',
+			this.artist = 'artist'
 		}
 	});
 
@@ -35,20 +35,20 @@
 		tagName : 'li',
 		render : function() {
 			//$(this.el).html('Hello ' + this.model.get('name'));
-			$(this.el).html('Hello ' + this.model.get('conquest'));
-			$(this.el).html('Hello ' + this.model.get('desc'));
+			$(this.el).html('Hello ' + this.model.get('title'));
+			$(this.el).html('Hello ' + this.model.get('artist'));
 			
 			 Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-			 var MovieConquest = Parse.Object.extend("MovieConquest");
-			var movieConquest = new MovieConquest();
+			 var AllMusic = Parse.Object.extend("AllMusic");
+			var allMusic = new AllMusic();
 			
-			movieConquest.save({movie_conquest: this.model.get('conquest'),movie_desc: this.model.get('desc')}, {
-			  success: function(movieConquest) {
+			allMusic.save({music_title: this.model.get('title'),music_artist: this.model.get('artist')}, {
+			  success: function(allMusic) {
 			  
 				// The object was saved successfully.
-				alert("Movie Conquest added Successfully");
+				alert("Music added Successfully");
 			  },
-			  error: function(movieConquest, error) {
+			  error: function(allMusic, error) {
 				// The save failed.
 				// error is a Parse.Error with an error code and description.
 			  }

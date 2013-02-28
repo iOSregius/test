@@ -15,7 +15,7 @@
 		addToHelloCollection : function(e) {
 			var hello = new Hello({
 				//name : this.$('input').val()
-				title : this.$('#music_title').val(),
+				musicconquest : this.$('#music_conquest').val(),
 				desc : this.$('#music_desc').val()
 				
 			});
@@ -26,7 +26,7 @@
 	var Hello = Backbone.Model.extend({
 		initialize : function() {
 			//this.name = 'name'
-			this.title = 'title',
+			this.musicconquest = 'musicconquest',
 			this.desc = 'desc'
 		}
 	});
@@ -35,30 +35,26 @@
 		tagName : 'li',
 		render : function() {
 			//$(this.el).html('Hello ' + this.model.get('name'));
-			$(this.el).html('Hello ' + this.model.get('title'));
+			$(this.el).html('Hello ' + this.model.get('musicconquest'));
 			$(this.el).html('Hello ' + this.model.get('desc'));
 			
 			 Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-			 var AddMusic = Parse.Object.extend("AddMusic");
-			var addMusic = new AddMusic();
+			 var MusicConquest = Parse.Object.extend("MusicConquest");
+			var musicConquest = new MusicConquest();
 			
-			addMusic.save({music_title: this.model.get('title'),music_desc: this.model.get('desc')}, {
-			  success: function(addMusic) {
+			musicConquest.save({music_conquest: this.model.get('musicconquest'),music_desc: this.model.get('desc')}, {
+			  success: function(musicConquest) {
 			  
 				// The object was saved successfully.
-				alert("done");
+				alert("Music Conquest added Successfully");
 			  },
-			  error: function(addMusic, error) {
+			  error: function(musicConquest, error) {
 				// The save failed.
 				// error is a Parse.Error with an error code and description.
 			  }
 			});
-			
-			
-			
-			
-			
-			return this;
+
+		return this;
 		}
 	});
 

@@ -15,7 +15,7 @@
 		addToHelloCollection : function(e) {
 			var hello = new Hello({
 				//name : this.$('input').val()
-				title : this.$('#show_title').val(),
+				tvconquest : this.$('#tv_conquest').val(),
 				desc : this.$('#show_desc').val()
 				
 			});
@@ -26,7 +26,7 @@
 	var Hello = Backbone.Model.extend({
 		initialize : function() {
 			//this.name = 'name'
-			this.title = 'title',
+			this.tvconquest = 'tvconquest',
 			this.desc = 'desc'
 		}
 	});
@@ -35,20 +35,20 @@
 		tagName : 'li',
 		render : function() {
 			//$(this.el).html('Hello ' + this.model.get('name'));
-			$(this.el).html('Hello ' + this.model.get('title'));
+			$(this.el).html('Hello ' + this.model.get('tvconquest'));
 			$(this.el).html('Hello ' + this.model.get('desc'));
 			
 			 Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-			 var AddTv = Parse.Object.extend("AddTv");
-			var addTv = new AddTv();
+			 var TvConquest = Parse.Object.extend("TvConquest");
+			var tvConquest = new TvConquest();
 			
-			addTv.save({show_title: this.model.get('title'),show_desc: this.model.get('desc')}, {
-			  success: function(addTv) {
+			tvConquest.save({tv_conquest: this.model.get('tvconquest'),show_desc: this.model.get('desc')}, {
+			  success: function(tvConquest) {
 			  
 				// The object was saved successfully.
-				alert("done");
+				alert("Tv Conquest added Successfully");
 			  },
-			  error: function(addTv, error) {
+			  error: function(tvConquest, error) {
 				// The save failed.
 				// error is a Parse.Error with an error code and description.
 			  }

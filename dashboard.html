@@ -13,10 +13,10 @@
   <script src="js/underscore.js"></script>
   <script src="js/backbone.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
-  
+
   <script>
   $(document).ready(function() {
- 
+  
   if(document.cookie.length == 0){
   	window.location = "index.html"
 		//alert("No cookies");
@@ -42,14 +42,14 @@
 	function fetching(aaa)
 	{
 		Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-		var AddMovie = Parse.Object.extend("AddMovie");
-		var query = new Parse.Query(AddMovie);
-		query.get("blBQ5zg1Jm", {
-		success: function(addMovie) {
+		var MovieConquest = Parse.Object.extend("MovieConquest");
+		var query = new Parse.Query(MovieConquest);
+		query.get("a0KDafZojj", {
+		success: function(movieConquest) {
 		// The object was retrieved successfully.
-		var movie_title = addMovie.get("movie_title");
-		var movie_desc = addMovie.get("movie_desc");
-		document.getElementById('movie_title').innerHTML = movie_title;
+		var movie_conquest = movieConquest.get("movie_conquest");
+		var movie_desc = movieConquest.get("movie_desc");
+		document.getElementById('movie_conquest').innerHTML = movie_conquest;
 		document.getElementById('movie_desc').innerHTML = movie_desc;
 		},
 		error: function(object, error) {
@@ -58,14 +58,14 @@
 		// error is a Parse.Error with an error code and description.
 		}
 		});
-		var AddTravel = Parse.Object.extend("AddTravel");
-		var query = new Parse.Query(AddTravel);
-		query.get("94gcMuLsh9", {
-		success: function(addTravel) {
+		var TravelConquest = Parse.Object.extend("TravelConquest");
+		var query = new Parse.Query(TravelConquest);
+		query.get("irMctkmEF5", {
+		success: function(travelConquest) {
 		// The object was retrieved successfully.
-		var travel_title = addTravel.get("travel_title");
-		var travel_desc = addTravel.get("travel_desc");
-		document.getElementById('travel_title').innerHTML = travel_title;
+		var travel_conquest = travelConquest.get("travel_conquest");
+		var travel_desc = travelConquest.get("travel_desc");
+		document.getElementById('travel_conquest').innerHTML = travel_conquest;
 		document.getElementById('travel_desc').innerHTML = travel_desc;
 		},
 		error: function(object, error) {
@@ -74,14 +74,14 @@
 		// error is a Parse.Error with an error code and description.
 		}
 		});
-		var AddTv = Parse.Object.extend("AddTv");
-		var query = new Parse.Query(AddTv);
-		query.get("kuqXjFF5So", {
-		success: function(addTv) {
+		var TvConquest = Parse.Object.extend("TvConquest");
+		var query = new Parse.Query(TvConquest);
+		query.get("ECoP0JgfwF", {
+		success: function(tvConquest) {
 		// The object was retrieved successfully.
-		var show_title = addTv.get("show_title");
-		var show_desc = addTv.get("show_desc");
-		document.getElementById('show_title').innerHTML = show_title;
+		var tv_conquest = tvConquest.get("tv_conquest");
+		var show_desc = tvConquest.get("show_desc");
+		document.getElementById('tv_conquest').innerHTML = tv_conquest;
 		document.getElementById('show_desc').innerHTML = show_desc;
 		},
 		error: function(object, error) {
@@ -100,10 +100,10 @@
  +'<a href="#apples/<%=name%>" >'
 +'<%=name%>'
 +'</a>&nbsp;<a class="details" style="text-decoration:none" href="#">Welcome, <label id="namee"></label></a>|<a href="#" style="text-decoration:none" onclick="logout()" >Logout</a></div>&nbsp;'+fetching()+'</div><br /><div id="left">'
-			+'<div id="travel"><h4><div id="travel_title"></div></h4><p id="travel_desc" class="ellipsis"></p>&nbsp;<div id="more">more</div><br /><button>To The List!</button></div>'
-			+'<div id="film"><h4><div id="movie_title"></div></h4><p id="movie_desc"></p>&nbsp;<a href="">more</a><br /><button>To The List!</button></div>'
-			+'<div id="tv"><h4><div id="show_title"></div></h4><p id="show_desc"></p>&nbsp;<a href="">more</a><br /><button>To The List!</button></div></div>'
-			+'<div id="right">Friends<br /><div id="friend"><img src="img/Koala.jpg" id="pic" /><p id="name"><a href="">aaaaa</a></p></div>'
+			+'<div id="travel"><h4><div id="travel_conquest"></div></h4><p id="travel_desc" class="ellipsis"></p>&nbsp;<div id="read_more1">Read More</div><br /><button onclick="travel()">To The List!</button></div>'
+			+'<div id="film"><h4><div id="movie_conquest"></div></h4><p id="movie_desc" class="ellipsis"></p>&nbsp;<div id="read_more2">Read More</div><br /><button onclick="movie()">To The List!</button></div>'
+			+'<div id="tv"><h4><div id="tv_conquest"></div></h4><p id="show_desc" class="ellipsis"></p>&nbsp;<div id="read_more3">Read More</div><br /><button onclick="tv()">To The List!</button></div></div>'
+			+'<div id="right">Friends<br /><div id="friend"><table id="name"></table></div>'
 			+'</div>'
 			),
 	  
@@ -118,6 +118,51 @@
       Backbone.history.start();      
     })
 	
+	<!------------------------------ functtion to set cookie to go tolist.html -------------------------->
+	
+		function travel(){
+		function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+		}
+		createCookie('list','travel',1);
+		window.location = "tolist.html?travel";
+		}
+		
+		function movie(){
+		function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+		}
+		createCookie('list','movie',1);
+		window.location = "tolist.html?movie";
+		}
+		
+		function tv(){
+		function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+		}
+		createCookie('list','tv',1);
+		window.location = "tolist.html?tv";
+		}
+	
+	<!------------------------------ functtion to set cookie to go tolist.html -------------------------->
 	
 	function readCookie(name) {
 	var nameEQ = name + "=";
@@ -127,73 +172,44 @@
 		while (c.charAt(0)==' ') c = c.substring(1,c.length);
 		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
 	}
-	//return null;
-	document.getElementById('namee').innerHTML = readCookie('f_name');
-	//document.getElementById('middlee').innerHTML = readCookie('f_name');
-}
+		//return null;
+		document.getElementById('namee').innerHTML = readCookie('f_name');
+	}
 
-
-function logout(){
-function createCookie(name,value,days) {
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime()+(days*24*60*60*1000));
-        var expires = "; expires="+date.toGMTString();
-    }
-    else var expires = "";
-    document.cookie = name+"="+value+expires+"; path=/";
-}
-
-    createCookie("f_name","",-1);
- createCookie("u_name","",-1);
- createCookie("email11","",-1);
- FB.logout(function(response) {
-  // user is now logged out
-  window.location = "index.html"
-});
-
-//window.location = "index.html"
-}
-
- // Load the SDK Asynchronously
-  (function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-   }(document));
-
-
-window.fbAsyncInit = function() {
-    FB.init({
-      appId  : '252507681519662',
-	  channelUrl : '//zsitro.com/applications/development/backbonelogin/channel.php',
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true  // parse XFBML
-    });
-
-    FB.getLoginStatus(function(response){
-        console.log('FB resp:', response,response.status);
-		$('#btnLogin').on('click',function(){
-			window.activeSession.login(
-			{
-				before:function(){console.log('before login()')},
-				after:function(){console.log('after login()')}
-			});
-		});
-    });
-
-}; 
-
+	//START FACEBOOK LOGOUT FUNCTION
+	function logout(){
+	function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+	}
 	
-	
-	</script>
+		createCookie("f_name","",-1);
+	 createCookie("u_name","",-1);
+	 createCookie("email11","",-1);
+	 FB.logout(function(response) {
+	  // user is now logged out
+	  window.location = "index.html"
+	});
+	}
+	//END FACEBOOK LOGOUT FUNCTION
+</script>
+<!--FACEBOOK SDK HELPS FOR FACEBOOK LOGOUT FUNCTION-->
+<script src="js/fbsdk.js"></script>
+<!--FACEBOOK SDK HELPS FOR FACEBOOK LOGOUT FUNCTION-->
+<!-- FACEBOOK FRIENDLIST SCRIPT -->
+<script src="js/fbfriend.js"></script>
+<!-- FACEBOOK FRIENDLIST SCRIPT -->
+
+
 </head>
 
-<body>
-<body onLoad="readCookie();">
+<body onLoad="readCookie(), FBfriends();">
+
 
 </body>
 </html>

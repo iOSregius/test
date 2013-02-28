@@ -38,12 +38,14 @@ body {
     color: green;
     line-height: 13px;
 }
+
 #left{
 	float: left;
     height: auto;
     margin-left: 70px;
     width: 650px;
 }
+
 
 #travel{
 	border-color: black;
@@ -80,5 +82,5 @@ padding:10px;
 }
 #friend p{
 float:left;
- width : 100px;
+ width : 320px;
 }

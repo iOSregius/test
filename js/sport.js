@@ -15,7 +15,7 @@
 		addToHelloCollection : function(e) {
 			var hello = new Hello({
 				//name : this.$('input').val()
-				title : this.$('#sport_title').val(),
+				sportconquest : this.$('#sport_conquest').val(),
 				desc : this.$('#sport_desc').val()
 				
 			});
@@ -26,7 +26,7 @@
 	var Hello = Backbone.Model.extend({
 		initialize : function() {
 			//this.name = 'name'
-			this.title = 'title',
+			this.sportconquest = 'sportconquest',
 			this.desc = 'desc'
 		}
 	});
@@ -35,20 +35,20 @@
 		tagName : 'li',
 		render : function() {
 			//$(this.el).html('Hello ' + this.model.get('name'));
-			$(this.el).html('Hello ' + this.model.get('title'));
+			$(this.el).html('Hello ' + this.model.get('sportconquest'));
 			$(this.el).html('Hello ' + this.model.get('desc'));
 			
 			 Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-			 var AddSport = Parse.Object.extend("AddSport");
-			var addSport = new AddSport();
+			 var SportConquest = Parse.Object.extend("SportConquest");
+			var sportConquest = new SportConquest();
 			
-			addSport.save({sport_title: this.model.get('title'),sport_desc: this.model.get('desc')}, {
-			  success: function(addSport) {
+			sportConquest.save({sport_conquest: this.model.get('sportconquest'),sport_desc: this.model.get('desc')}, {
+			  success: function(sportConquest) {
 			  
 				// The object was saved successfully.
-				alert("done");
+				alert("Sport Conquest added Successfully");
 			  },
-			  error: function(addSport, error) {
+			  error: function(sportConquest, error) {
 				// The save failed.
 				// error is a Parse.Error with an error code and description.
 			  }

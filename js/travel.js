@@ -15,7 +15,7 @@
 		addToHelloCollection : function(e) {
 			var hello = new Hello({
 				//name : this.$('input').val()
-				title : this.$('#travel_title').val(),
+				travelconquest : this.$('#travel_conquest').val(),
 				desc : this.$('#travel_desc').val()
 				
 			});
@@ -26,7 +26,7 @@
 	var Hello = Backbone.Model.extend({
 		initialize : function() {
 			//this.name = 'name'
-			this.title = 'title',
+			this.travelconquest = 'travelconquest',
 			this.desc = 'desc'
 		}
 	});
@@ -35,20 +35,20 @@
 		tagName : 'li',
 		render : function() {
 			//$(this.el).html('Hello ' + this.model.get('name'));
-			$(this.el).html('Hello ' + this.model.get('title'));
+			$(this.el).html('Hello ' + this.model.get('travelconquest'));
 			$(this.el).html('Hello ' + this.model.get('desc'));
 			
 			 Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
-			 var AddTravel = Parse.Object.extend("AddTravel");
-			var addTravel = new AddTravel();
+			 var TravelConquest = Parse.Object.extend("TravelConquest");
+			var travelConquest = new TravelConquest();
 			
-			addTravel.save({travel_title: this.model.get('title'),travel_desc: this.model.get('desc')}, {
-			  success: function(addTravel) {
+			travelConquest.save({travel_conquest: this.model.get('travelconquest'),travel_desc: this.model.get('desc')}, {
+			  success: function(travelConquest) {
 			  
 				// The object was saved successfully.
-				alert("done");
+				alert("Travel Conquest added Successfully");
 			  },
-			  error: function(addTravel, error) {
+			  error: function(travelConquest, error) {
 				// The save failed.
 				// error is a Parse.Error with an error code and description.
 			  }
