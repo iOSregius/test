@@ -51,7 +51,8 @@
 			  success: function(allMovie) {
 			  
 				// The object was saved successfully.
-				alert("Movie added Successfully");
+				movie();
+				//alert("Movie added Successfully");
 			  },
 			  error: function(allMovie, error) {
 				// The save failed.
@@ -60,12 +61,25 @@
 			});
 			
 			
-			
-			
-			
 			return this;
 		}
 	});
+	
+	function movie(){
+		function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+		}
+		createCookie('list','movie',1);
+		window.location = "list.html?movie";
+		}
+		
+		
 
 	var HelloList = Backbone.Collection.extend({
 		model : Hello

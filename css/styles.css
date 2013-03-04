@@ -47,19 +47,12 @@ body {
 }
 
 
-#travel{
+
+#film, #sport, #travel, #tv, #music, #book{
 	border-color: black;
     border-style: solid;
 }
 
-#film{
-	border-color: black;
-    border-style: solid;
-}
-#tv{
-	border-color: black;
-    border-style: solid;
-}
 
 #right{
 	float: left;

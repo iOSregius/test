@@ -46,7 +46,7 @@
 			  success: function(addTravel) {
 			  
 				// The object was saved successfully.
-				alert("Location added Successfully");
+				location();
 			  },
 			  error: function(allLocation, error) {
 				// The save failed.
@@ -61,6 +61,20 @@
 			return this;
 		}
 	});
+	
+	function location(){
+		function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+		}
+		createCookie('list','location',1);
+		window.location = "list.html?location";
+		}
 
 	var HelloList = Backbone.Collection.extend({
 		model : Hello

@@ -46,7 +46,7 @@
 			  success: function(tvShow) {
 			  
 				// The object was saved successfully.
-				alert("Tv Show added Successfully");
+				tvshow();
 			  },
 			  error: function(tvShow, error) {
 				// The save failed.
@@ -61,6 +61,20 @@
 			return this;
 		}
 	});
+	
+	function tvshow(){
+		function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+		}
+		createCookie('list','tvshow',1);
+		window.location = "list.html?tvshow";
+		}
 
 	var HelloList = Backbone.Collection.extend({
 		model : Hello
