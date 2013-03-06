@@ -159,10 +159,8 @@
 
     var homeView = Backbone.View.extend({
       el: 'body',
-		  template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
- +'<a href="#apples/<%=name%>" >'
-+'<%=name%>'
-+'</a>&nbsp;<a class="details" style="text-decoration:none" href="#">Welcome, <label id="namee"></label></a>|<a href="#" style="text-decoration:none" onclick="logout()" >Logout</a></div>&nbsp;'+fetching()+'</div><br /><div id="left">'
+		  template: _.template('<div style="width:auto;background-color:#99CCFF;height:100px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
++'</a>&nbsp;<a class="details" style="text-decoration:none" href="#">Welcome, <label id="namee"></label></a>|<a href="#" style="text-decoration:none" onclick="logout()" >Logout</a><p id="fb_pic"></p></div>&nbsp;'+fetching()+'</div><br /><div id="left">'
 			+'<div class="conquest_listing"></div>'
 			+'</div>'
 			+'<div id="right">Friends<br /><div id="friend"><table id="name"></table></div>'
@@ -236,6 +234,8 @@
 	}
 		//return null;
 		document.getElementById('namee').innerHTML = readCookie('f_name');
+		var fb_pic1 = "<img src="+readCookie('fb_pic')+"/>";
+		$('#fb_pic').append(fb_pic1);
 	}
 
 	//START FACEBOOK LOGOUT FUNCTION

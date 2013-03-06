@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		
+		<title>Add Tv Conquest</title>
+		<style type="text/css">
+			body{
+				color:#FF4242;
+				background-color:#F0F2EB;
+			}
+			fieldset{
+				border:2px solid #D4EE5E;
+				padding:20px;
+				background-color:#F4FAD2;
+			}
+			input, button{
+				font-size:1.2em;
+				padding:5px;
+			}
+			
+			a{
+				color:#FF4242;
+			}
+		</style>
+	</head>
+	<body onLoad="return fetching();">
+		<header>
+			<h3>TV CONQUESTS</h3>
+			
+		</header>
+		
+		<section id='UserInput'>
+			<fieldset>
+				
+				
+				
+						Add Conquest Title :: <input type="text" name="conquest" id="conquest"/>
+						<br />
+						Add Conquest Description :: <textarea name="con_desc" id="con_desc"></textarea>
+						<br />
+						<div id="tv"></div><br />
+						
+						<div><input type="text" id="tvshows" name="tvshows" maxlength="1024"  /></div>
+						<button>Submit</button>	
+	
+			</fieldset>
+		</section> 
+		
+				
+		<script>
+		function fetching(movielist)
+		{
+			Parse.initialize("fWOxyeKJiLh7E5itaqrm0roBKFoJe47CDzhjpexq", "3aq8XaBCCms1uZgsVOVjz7CEjgZs6jDS1Er6NGbw");
+			//START FETCH TV SHOW CONQUESTS
+				var TvShow = Parse.Object.extend("TvShow");
+				var query = new Parse.Query(TvShow);
+				var objectId = TvShow.id;
+				alert(objectId);
+				query.find({
+				success: function(results) {
+				
+				for (var i = 0; i < results.length; i++) {
+				
+				var show_title = results[i].get("show_title");
+				var show_season = results[i].get("show_season");
+				var tv_show = "<tr><td><input type='checkbox' name='tv_select' id='"+results[i]+"' value='"+TvShow.objectId+"&nbsp;"+show_season+"'+></td><td>"+show_title+'&nbsp;</td><td>: &nbsp;'+show_season+'</td></tr>';
+				$("#tv").append(tv_show);
+				}
+					$("input[type=checkbox]").change(function () {
+					var newArr = $("input:checked").map(function () { return this.value; });
+					$("#tvshows").val(newArr.get().join(","));
+				});
+				},	
+				error: function(object, error) {
+				alert("failed");
+				// The object was not retrieved successfully.
+				// error is a Parse.Error with an error code and description.
+				}
+				});
+			//END FETCH TV SHOW CONQUESTS
+			
+			
+		}
+	</script>
+		
+	<script src="../js/jquery.js"></script>
+	<script src="../js/underscore.js"></script>
+	<script src="../js/backbone.js"></script>
+	<script type="text/javascript" src="../js/testing.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+	</body>
+</html>
+
+
+

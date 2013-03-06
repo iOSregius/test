@@ -11,7 +11,7 @@
 	<script src="https://raw.github.com/caolan/async/master/lib/async.js"></script>
 	<script src="../js/underscore.js"></script>
 	<script src="../js/backbone.js"></script>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
   
 </head>
 
@@ -24,7 +24,12 @@
 
 
 <script type="text/javascript">
-
+ $(document).ready(function() {
+  if(document.cookie.length == 0){
+  	window.location = "index.html"
+		//alert("No cookies");
+	} 
+	});
 
 
 <!-------------------- Login View ------------------------>
@@ -48,7 +53,7 @@ var app;
 		  template: _.template('<div style="width:auto;background-color:#99CCFF;margin:0 auto;height:50px;vertical-align:middle;line-height: 50px;"> <h3>Do, Share, Compare&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
              +'<a href="#apples/<%=name%>" >'
             +'<%=name%>'
-            +'</a>&nbsp;</div><br /><a href="movie_add.html">Film</a> | <a href="tv_show.html">TV</a> | <a href="addbook.html">Books</a> | <a href="addmusic.html">Music</a> | <a href="addsport.html">Sport & Leisure</a> | <a href="addlocation.html">Travel & Adventure</a> | <a href="alltasks.html">Show all tasks</a>'),
+            +'</a>&nbsp;</div><br /><a href="movie_add.html">Film</a> | <a href="tv_show.html">TV</a> | <a href="addbook.html">Books</a> | <a href="addmusic.html">Music</a> | <a href="addsport.html">Sport & Leisure</a> | <a href="addlocation.html">Travel & Adventure</a> <br /> <a href="tvalltasks.html">Tasks of Tv</a> | <a href="musicalltasks.html">Tasks of Music</a> | <a href="moviealltasks.html">Tasks of Movie</a> | <a href="sportalltasks.html">Tasks of Sport</a> | <a href="bookalltasks.html">Tasks of Books</a> | <a href="locationalltasks.html">Tasks of Travels</a>'),
 	  
       render: function(){
         this.$el.html(this.template({}));

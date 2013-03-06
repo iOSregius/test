@@ -50,45 +50,19 @@ var app;
 		  success: function(user) {
 		  
 		   $(".success").show();
+		   	createCookie('uname',uname,1);
 			window.location = "select.html";
 		  },
 		  error: function(user, error) {
-		   alert(error);
+		   alert("Enter correct Username/Password");
 			// The login failed. Check error to see why.
 		  }
 		});
 		}
-			//var uname = document.getElementById('username');
-			//var pass = document.getElementById('password');
-			//alert(uname.value);
-			//alert(pass.value);
-			
-			/*var user = new Parse.User();
-			user.set("username", "admin");
-			user.set("password", "admin");
-			user.set("email", "akash.patel@regius-it.com");
-			 
-			// other fields can be set just like with Parse.Object
-			//user.set("phone", "415-392-0202");
-			 
-			user.signUp(null, {
-			  success: function(user) {
-				// Hooray! Let them use the app now.
-			  },
-			  error: function(user, error) {
-				// Show the error message somewhere and let the user try again.
-				alert("Error: " + error.code + " " + error.message);
-			  }
-			});*/
-		
-			
-			
-			
 
 <!------------- LOGIN CODE ------------------------------->
 
 <!-------------------- Login View ------------------------>
-
 
 
     var homeView = Backbone.View.extend({
@@ -109,5 +83,17 @@ var app;
       Backbone.history.start();      
     })
 <!-------------------- Login View ------------------------>
+
+		function createCookie(name,value,days) {
+			if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+			}
+			else var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+			}
+			
+	
 </script>
 </body>
