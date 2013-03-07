@@ -68,8 +68,8 @@ function show_frnds(frn,fb_data)
 	{
 		if(fb_data[f].id == frn){
 			
-			var im = "<tr><td><img src='https://graph.facebook.com/"+fb_data[f].id+"/picture' title='"+fb_data[f].name+"'></td><td>"+fb_data[f].name+"</td></tr>";
-			$("#name").append(im);
+			var im = "<a class='pull-left' href='#'><img class='media-object' src='https://graph.facebook.com/"+fb_data[f].id+"/picture' title='"+fb_data[f].name+"'></a><div class='media-body'><h4 class='media-heading'>"+fb_data[f].name+"</h4><p>This is the content for your media.</p></div>";
+			$("#fbmedia").append(im);
 		}
 	}	
 }

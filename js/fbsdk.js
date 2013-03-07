@@ -19,7 +19,7 @@
 	
 		FB.getLoginStatus(function(response){
 			console.log('FB resp:', response,response.status);
-			$('#btnLogin').on('click',function(){
+			$('.btnLogin').on('click',function(){
 				window.activeSession.login(
 				{
 					before:function(){console.log('before login()')},
